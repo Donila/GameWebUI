@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import App from '../App.vue';
+import VueRouter from 'vue-router';
+
 import RegistrationPage from '../components/RegistrationPage.vue';
 import LoginPage from '../components/LoginPage.vue';
 import MainPage from '../components/MainPage.vue';
-
-import VueRouter from 'vue-router';
+import ProfilePage from '../components/ProfilePage.vue';
+import GamesPage from '../components/GamesPage.vue';
 
 Vue.use(VueRouter);
 
@@ -16,7 +18,14 @@ const routes = [
     children: [
       { path: '/login', component: LoginPage },
       { path: '/register', component: RegistrationPage },
-      { path: '/play', component: MainPage, meta: { requiresAuth: true } }
+      { path: '/play', component: MainPage, meta: { requiresAuth: true } },
+      {
+        path: '/profile',
+        component: ProfilePage,
+        meta: { requiresAuth: true }
+      },
+      { path: '/profile', component: MainPage, meta: { requiresAuth: true } },
+      { path: '/games', component: GamesPage, meta: { requiresAuth: true } }
     ]
   }
 ];

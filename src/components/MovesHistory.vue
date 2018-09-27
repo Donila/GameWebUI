@@ -1,19 +1,23 @@
 <template>
-    <v-layout row>
-        <v-flex sm4>
+    <v-layout row align-content-start>
+        <v-flex sm12>
             <v-layout v-for="move in moves" :key="move._id" column>
               <!-- <v-flex>
-                <div>p1: {{move[p1]hitcode}}, A: {{getAtk(move[p1]hitcode)}}, D: {{getDef(move[p1]hitcode)}}</div>
+                <div>p1: {{move[p1].hitcode}}, A: {{getAtk(move[p1].hitcode)}}, D: {{getDef(move[p1].hitcode)}}</div>
                 <div>p2: {{move[p2].hitcode}}, A: {{getAtk(move[p2].hitcode)}}, D: {{getDef(move[p2].hitcode)}}</div>
               </v-flex> -->
               <v-flex row>
                 <span v-for="i in 3">
-                  <span v-if="isBlocked(i, move)"> T </span>
-                  <span v-else-if="isBlock(i, move)"> O </span>
-                  <span v-else-if="isHit(i, move)"> X </span>
-                  <span v-else> - </span>
+                  <span v-if="isBlocked(i, move)"><v-icon>highlight_off</v-icon></span>
+                  <span v-else-if="isBlock(i, move)"><v-icon>panorama_fish_eye</v-icon></span>
+                  <span v-else-if="isHit(i, move)"><v-icon>clear</v-icon></span>
+                  <span v-else><v-icon>remove</v-icon></span>
                 </span>
-                <span> (<span v-if="move[p1].damage > 0">-</span>{{move[p1].damage}}) </span>
+                <span class="primary">{{getUserName(p1)}}</span>
+                <span v-if="move[p1].damage > 0"> deals </span> 
+                <span v-if="move[p1].damage === 0">'s hit was blocked by </span>
+                <span class="primary">{{getUserName(p2)}}</span>
+                <span v-if="move[p1].damage > 0"> {{move[p1].damage}} damage</span>
               </v-flex>
           </v-layout>
         </v-flex>
@@ -22,7 +26,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-let players = { p1: 'p1', p2: 'p2' };
 
 export default {
   props: ['moves', 'p1', 'p2'],
@@ -73,6 +76,11 @@ export default {
     },
     isHit(i, move) {
       return i === this.getAtk(move[this.p1].hitcode);
+    },
+
+    getUserName(player) {
+      let p = this.game[player].user;
+      return p ? p.name : 'BOT';
     }
   }
 };

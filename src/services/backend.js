@@ -90,11 +90,25 @@ const del = (url, id, token) => {
   });
 };
 
+const get = url => {
+  return new Promise((resolve, reject) => {
+    backend
+      .get(`${baseURL}/${url}`)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 const BackendClass = {
   auth: auth,
   post: post,
   put: put,
-  del: del
+  del: del,
+  get: get
 };
 
 export default BackendClass;

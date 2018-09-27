@@ -1,4 +1,5 @@
 <template>
+<v-container>
     <v-card>
         <v-card-title v-if="game.id">
             Game {{game._id}} {{game.state}}
@@ -10,34 +11,44 @@
             Winner: {{game.winner ? game.winner.name : 'BOT'}}
         </v-card-text>
         <v-card-actions v-if="game.state == 'IN_PROGRESS'">
-            <div>
-                Attack
-                <v-btn-toggle v-model="attack" mandatory>
-                    <v-btn flat>
-                        <v-icon>format_align_left</v-icon>
-                    </v-btn>
-                    <v-btn flat>
-                        <v-icon>format_align_center</v-icon>
-                    </v-btn>
-                    <v-btn flat>
-                        <v-icon>format_align_right</v-icon>
-                    </v-btn>
-                </v-btn-toggle>
-            </div>
-            <div>
-                Defense
-                <v-btn-toggle v-model="defense" mandatory>
-                    <v-btn flat>
-                        <v-icon>format_align_left</v-icon>
-                    </v-btn>
-                    <v-btn flat>
-                        <v-icon>format_align_center</v-icon>
-                    </v-btn>
-                    <v-btn flat>
-                        <v-icon>format_align_right</v-icon>
-                    </v-btn>
-                </v-btn-toggle>
-            </div>
+            <v-layout row>
+                <v-layout column>
+                    <v-flex>
+                        <div>Attack</div>
+                    </v-flex>
+                    <v-flex>
+                        <v-btn-toggle v-model="attack" mandatory>
+                            <v-btn flat>
+                                <v-icon>format_align_left</v-icon>
+                            </v-btn>
+                            <v-btn flat>
+                                <v-icon>format_align_center</v-icon>
+                            </v-btn>
+                            <v-btn flat>
+                                <v-icon>format_align_right</v-icon>
+                            </v-btn>
+                        </v-btn-toggle>
+                    </v-flex>
+                </v-layout>
+                <v-layout column>
+                    <v-flex>
+                        <div>Defense</div>
+                    </v-flex>
+                    <v-flex>
+                        <v-btn-toggle v-model="defense" mandatory>
+                            <v-btn flat>
+                                <v-icon>format_align_left</v-icon>
+                            </v-btn>
+                            <v-btn flat>
+                                <v-icon>format_align_center</v-icon>
+                            </v-btn>
+                            <v-btn flat>
+                                <v-icon>format_align_right</v-icon>
+                            </v-btn>
+                        </v-btn-toggle>
+                    </v-flex>
+                </v-layout>
+            </v-layout>
         </v-card-actions>
         <v-card-actions>
             <div>
@@ -48,6 +59,7 @@
             </div>
         </v-card-actions>
     </v-card>
+    </v-container>
 </template>
 
 <script>

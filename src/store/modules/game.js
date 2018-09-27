@@ -2,13 +2,17 @@ import backend from '../../services/backend';
 
 // initial state
 const state = {
-  current: {}
+  current: {},
+  games: []
 };
 
 // getters
 const getters = {
   getCurrentGame: (state, getters, rootState) => {
     return state.current;
+  },
+  getGames: state => {
+    return state.games;
   }
 };
 
@@ -64,6 +68,19 @@ const actions = {
           console.log(err);
         });
     }
+  },
+  getLastGames({ commit, rootState, state }) {
+    backend
+      .get(`/games?user=${rootState.user.logged.id}`)
+      .then(res => {
+        return res.data;
+      })
+      .then(data => {
+        commit('setGames', data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 
@@ -71,6 +88,9 @@ const actions = {
 const mutations = {
   setGame(state, game) {
     state.current = game;
+  },
+  setGames(state, games) {
+    state.games = games;
   }
 };
 

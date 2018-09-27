@@ -1,21 +1,21 @@
 <template>
-<v-layout column>
-  <v-layout row>
-    <v-flex xs12 sm6>
-      <div>Welcome to The Game, {{user.name}}! <v-btn @click="logout()">Log Out</v-btn></div>
-      <GameControls></GameControls>
-    </v-flex>
+  <v-container column>
+    <v-layout>
+      <v-flex xs12 sm6 offset-sm3 md4 offset-md4>
+        <GameControls></GameControls>
+      </v-flex>
+    </v-layout>
+    <v-layout row>
+      <v-flex xs12 sm6 v-if="game.id && game.state != 'ABANDONED'">
+        <PlayerInfo :player="game.p1"></PlayerInfo>
+      </v-flex>
 
-    <v-flex xs12 sm6 v-if="game.id && game.state != 'ABANDONED'">
-      <PlayerInfo :player="game.p1"></PlayerInfo>
-    </v-flex>
+      <v-flex xs12 sm6 v-if="game.id && game.state != 'ABANDONED'">
+        <PlayerInfo :player="game.p2"></PlayerInfo>
+      </v-flex>
+    </v-layout>
 
-    <v-flex xs12 sm6 v-if="game.id && game.state != 'ABANDONED'">
-      <PlayerInfo :player="game.p2"></PlayerInfo>
-    </v-flex>
-  </v-layout>
-</v-layout>
-  
+  </v-container>
 </template>
 
 <script>

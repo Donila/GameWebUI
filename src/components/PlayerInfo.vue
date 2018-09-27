@@ -14,9 +14,8 @@
                 </v-progress-circular>
             </div>
         </v-card-title>
-        <v-card-text>
-            <MovesHistory :moves="game.moveResults" :p1="p1" :p2="p2"></MovesHistory>
-        </v-card-text>
+
+        <MovesHistory :moves="game.moveResults" :p1="p1" :p2="p2"></MovesHistory>
     </v-card>
 </template>
 
@@ -40,7 +39,7 @@ export default {
   },
   methods: {
     hpPercentage() {
-      let perc = this.player.hp * 100 / this.player.startingHp;
+      let perc = (this.player.hp * 100) / this.player.startingHp;
       return perc;
     }
   }
